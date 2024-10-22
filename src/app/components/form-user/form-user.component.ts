@@ -7,6 +7,8 @@ import { EPermission } from '../../interfaces/permission.interface';
 import { ERole } from '../../interfaces/rol.interface';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { StrongPasswordRegx } from '../../utils/regex';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-form-user',
@@ -25,10 +27,11 @@ export class FormUserComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.userForm = this.formBuilder.group({
+      id: [''],
       name: [null, [Validators.minLength(3), Validators.required]],
-      password: [null, [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$")]],
+      password: [null, [Validators.required, Validators.pattern(StrongPasswordRegx)]],
       rol: [null, Validators.required],
-      permission: [[], Validators.required]
+      permission: [null, Validators.required]
     })
   }
 
@@ -42,9 +45,17 @@ export class FormUserComponent {
      this.userForm.get('permission')?.setValue(event.value === ERole.ADMIN ? this.listPermission : [])
   }
 
-  sendUserData() {
-    if (this.userForm.invalid) return
-    this.handleSendUserData.emit(this.userForm.value)
+  generateID(user: IUser): IUser {
+    return {
+      ...user,
+      id: uuidv4()
+    }
   }
+
+  sendUserData() {    
+    if (this.userForm.invalid) return
+    this.handleSendUserData.emit(this.userForm.value.id ? this.userForm.value : this.generateID(this.userForm.value))
+  }
+
 
 }

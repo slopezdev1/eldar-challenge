@@ -1,4 +1,9 @@
+@if (!isLoading) {
 <div class="flex flex-column gap-3 h-full">
     <h2>{{id ? 'Editar' : 'Crear'}} Usuario </h2>
-    <app-form-user></app-form-user>
+    <app-form-user (handleSendUserData)="getUserData($event)" ></app-form-user>
 </div>
+} @else {
+    <p-progressSpinner ariaLabel="loading" />
+}
+<p-toast></p-toast>
