@@ -26,7 +26,26 @@
             Debe contener mínimo 8 caracteres, una mayúscula y un número
         </small>
         }
-
+    </div>
+    <div class="flex flex-column gap-2">
+        <label for="password">Rol</label>
+        <p-dropdown (onChange)="changeRol($event)" styleClass="w-full" formControlName="rol" [options]="listRol" placeholder="Elige el rol" />
+        @if
+        (hasError('password', 'required')) {
+        <small class="text-red-500" id="password">
+            Debe elegir un rol
+        </small>
+        }
+    </div>
+    <div class="flex flex-column gap-2">
+        <label for="password">Permisos</label>
+        <p-multiSelect styleClass="w-full" [options]="listPermission"  formControlName="permission" placeholder="Elige los permisos" />
+        @if
+        (hasError('password', 'required')) {
+        <small class="text-red-500" id="password">
+            Debe elegir al menos 1 permiso
+        </small>
+        }
     </div>
     <div class="w-full flex justify-content-center">
         <p-button type="submit">Crear</p-button>
