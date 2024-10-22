@@ -1,4 +1,4 @@
     <div class="w-full flex flex-column gap-3">
-        <app-header-table (handleRedirectEvent)="handleRedirectUser($event)"></app-header-table>
-        <app-table-user [users]="listUsers" (handleRedirectEvent)="handleRedirectUser($event)"></app-table-user>
+        <app-header-table [length]="listUsers.length" (handleRedirectEvent)="handleRedirectUser($event)"></app-header-table>
+        <app-table-user [users]="listUsers" (handleRedirectEvent)="handleRedirectUser($event)" (handleDeleteUserEvent)="handleDeleteUserEvent($event)"></app-table-user>
     </div>
