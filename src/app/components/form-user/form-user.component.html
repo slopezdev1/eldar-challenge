@@ -1,3 +1,4 @@
+@defer (when userFormData) {
 <form [formGroup]="userForm" (ngSubmit)="sendUserData()" class="w-full flex flex-column gap-3 w-20rem">
     <div class="flex flex-column gap-2">
         <label for="user">Usuario</label>
@@ -29,7 +30,8 @@
     </div>
     <div class="flex flex-column gap-2">
         <label for="password">Rol</label>
-        <p-dropdown (onChange)="changeRol($event)" styleClass="w-full" formControlName="rol" [options]="listRol" placeholder="Elige el rol" />
+        <p-dropdown (onChange)="changeRol($event)" styleClass="w-full" formControlName="role" [options]="listRol"
+            placeholder="Elige el rol" />
         @if
         (hasError('password', 'required')) {
         <small class="text-red-500" id="password">
@@ -39,7 +41,8 @@
     </div>
     <div class="flex flex-column gap-2">
         <label for="password">Permisos</label>
-        <p-multiSelect styleClass="w-full" [options]="listPermission"  formControlName="permission" placeholder="Elige los permisos" />
+        <p-multiSelect styleClass="w-full" [options]="listPermission" formControlName="permission"
+            placeholder="Elige los permisos" />
         @if
         (hasError('password', 'required')) {
         <small class="text-red-500" id="password">
@@ -48,6 +51,7 @@
         }
     </div>
     <div class="w-full flex justify-content-center">
-        <p-button type="submit">Crear</p-button>
+        <p-button type="submit">{{userFormData ? 'Editar' : 'Crear'}} </p-button>
     </div>
 </form>
+}

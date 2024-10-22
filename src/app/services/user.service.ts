@@ -21,4 +21,12 @@ export class UserService {
   editUser(body: IUser): Observable<any> {
     return this._httpClient.put(this.apiUrl + '/users/' + body.id, body)
   }
+
+  getUsers(): Observable<Array<IUser>> {
+    return this._httpClient.get<Array<IUser>>(this.apiUrl + '/users')
+  }
+
+  getUserById(id: string): Observable<IUser> {
+    return this._httpClient.get<IUser>(this.apiUrl + '/users/' + id)
+  }
 }
