@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormUserComponent } from '../form-user/form-user.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [FormUserComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
