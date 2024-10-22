@@ -1,4 +1,4 @@
-export enum ERol {
+export enum ERole {
     ADMIN = 'ADMIN',
     USER = 'USER'
 }

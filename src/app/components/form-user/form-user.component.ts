@@ -4,7 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { IUser } from '../../interfaces/user.interface';
 import { EPermission } from '../../interfaces/permission.interface';
-import { ERol } from '../../interfaces/rol.interface';
+import { ERole } from '../../interfaces/rol.interface';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 
@@ -21,7 +21,7 @@ export class FormUserComponent {
 
   userForm: FormGroup
   listPermission: Array<EPermission> = [EPermission.CANCEL, EPermission.DELETE, EPermission.CREATE, EPermission.EDIT] as Array<EPermission>
-  listRol: Array<ERol> = [ERol.ADMIN, ERol.USER]
+  listRol: Array<ERole> = [ERole.ADMIN, ERole.USER]
 
   constructor(private formBuilder: FormBuilder) {
     this.userForm = this.formBuilder.group({
@@ -39,7 +39,7 @@ export class FormUserComponent {
   }
 
   changeRol(event: DropdownChangeEvent) {
-     this.userForm.get('permission')?.setValue(event.value === ERol.ADMIN ? this.listPermission : [])
+     this.userForm.get('permission')?.setValue(event.value === ERole.ADMIN ? this.listPermission : [])
   }
 
   sendUserData() {

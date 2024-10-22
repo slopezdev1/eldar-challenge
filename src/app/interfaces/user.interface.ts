@@ -1,9 +1,9 @@
 import { EPermission } from "./permission.interface"
-import { ERol } from "./rol.interface"
+import { ERole } from "./rol.interface"
 
 export interface IUser {
     name: string,
     password: string
-    rol: ERol,
+    role: ERole,
     permission: Array<EPermission>
 }
