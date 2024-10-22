@@ -1,9 +1,14 @@
 <main class="flex h-screen w-full flex flex-column">
     <header class="w-full text-center shadow-4 bg-primary">
-        <div class="w-full flex p-4 align-items-center h-5rem justify-content-start">
-            <a [routerLink]="['/home']" class="h-full">
+        <div class="w-full flex p-4 align-items-center h-5rem justify-content-between">
+            <a [routerLink]="['../home']" class="h-full">
                 <img src="../../../assets/logo-eldar.png" class="h-full" alt="logo eldar">
             </a>
+            @if (userRole) {
+            <span> {{userRole}} </span>
+            <p-button (onClick)="logOut()" severity="secondary" styleClass="text-white" label="Cerrar sesión" [link]="true" />
+        }
+            
         </div>
     </header>
     <div class="w-full h-full flex align-items-center justify-content-center flex-column">

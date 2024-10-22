@@ -3,6 +3,7 @@ import { environment } from '../environment/environment.local';
 import { IUser } from '../interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 export class AuthService {
 
   private apiURL: string
-  currentUser: IUser = {} as IUser
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient, private router: Router) {
     this.apiURL = environment.apiUrl
   }
 
@@ -19,7 +19,7 @@ export class AuthService {
     return this._http.get<IUser[]>(`${this.apiURL}/users?name=${body.name}&password=${body.password}`).pipe(
       map( users => {
         if(users.length > 0) {
-          this.currentUser = users[0]
+          this.setUserSessionStorage(users[0])
           return users[0]
         }
         throw new Error('Usuario no encontrado o contraseña incorrecta');
@@ -28,5 +28,22 @@ export class AuthService {
         throw new Error('Usuario no encontrado o contraseña incorrecta');
       })
     )
+  }
+
+  isLoggedIn(): boolean {
+    return Boolean(this.getUserSessionStorage !== null)
+  }
+
+  getUserSessionStorage(): IUser {
+    return JSON.parse(sessionStorage.getItem('user')!)
+  }
+
+  setUserSessionStorage(user: IUser) {
+    sessionStorage.setItem('user', JSON.stringify(user))
+  }
+
+  clearSession() {
+    sessionStorage.removeItem('user')
+    this.router.navigate(['/auth'])
   }
 }
