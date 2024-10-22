@@ -44,8 +44,6 @@ export class FormUserComponent {
 
   sendUserData() {
     if (this.userForm.invalid) return
-    console.log(this.userForm.value);
-
     this.handleSendUserData.emit(this.userForm.value)
   }
 
