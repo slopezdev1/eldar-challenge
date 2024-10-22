@@ -1,0 +1,24 @@
+<p-table [value]="[{code: 1, name: 'ds', category: 's', quantity: 2}]">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Rol</th>
+            <th>Nombre</th>
+            <th>Contraseña</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.code }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>
+                <p-button icon="pi pi-pencil" [rounded]="true" />
+            </td>
+            <td>
+                <p-button icon="pi pi-trash" [rounded]="true" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
