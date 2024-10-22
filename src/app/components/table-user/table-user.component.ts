@@ -19,6 +19,7 @@ import { HiddenPasswordPipe } from '../../pipes/hidden-password.pipe';
 export class TableUserComponent {
 
   @Output() handleRedirectEvent = new EventEmitter<string>()
+  @Output() handleDeleteUserEvent = new EventEmitter<string>()
   @Input() users: Array<IUser> = []
 
   constructor(private confirmPopUpService: ConfirmationService) {
@@ -34,8 +35,9 @@ export class TableUserComponent {
       acceptLabel: 'Si, eliminar',
       rejectLabel: 'Cancelar',
       accept: () => {
-            },
-            reject: () => {
+        this.handleDeleteUserEvent.emit(id)
+      },
+      reject: () => {
             }
     })
   }
