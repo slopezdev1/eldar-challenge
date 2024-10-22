@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,9 +17,10 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './form-user.component.html',
   styleUrl: './form-user.component.css'
 })
-export class FormUserComponent {
+export class FormUserComponent implements OnInit {
 
   @Output() handleSendUserData = new EventEmitter<IUser>()
+  @Input() userFormData: IUser = {} as IUser
 
   userForm: FormGroup
   listPermission: Array<EPermission> = [EPermission.CANCEL, EPermission.DELETE, EPermission.CREATE, EPermission.EDIT] as Array<EPermission>
@@ -27,14 +28,19 @@ export class FormUserComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.userForm = this.formBuilder.group({
-      id: [''],
+      id: [null],
       name: [null, [Validators.minLength(3), Validators.required]],
       password: [null, [Validators.required, Validators.pattern(StrongPasswordRegx)]],
-      rol: [null, Validators.required],
-      permission: [null, Validators.required]
+      role: [null, Validators.required],
+      permission: [[], Validators.required]
     })
   }
 
+  ngOnInit(): void {
+    console.log(this.userFormData);
+    this.userForm.patchValue(this.userFormData)
+
+  }
   hasError(key: string, path: string): boolean {
     const userKey = this.userForm.get(key)!
 
@@ -42,7 +48,7 @@ export class FormUserComponent {
   }
 
   changeRol(event: DropdownChangeEvent) {
-     this.userForm.get('permission')?.setValue(event.value === ERole.ADMIN ? this.listPermission : [])
+    this.userForm.get('permission')?.setValue(event.value === ERole.ADMIN ? this.listPermission : [])
   }
 
   generateID(user: IUser): IUser {
@@ -52,7 +58,7 @@ export class FormUserComponent {
     }
   }
 
-  sendUserData() {    
+  sendUserData() {
     if (this.userForm.invalid) return
     this.handleSendUserData.emit(this.userForm.value.id ? this.userForm.value : this.generateID(this.userForm.value))
   }

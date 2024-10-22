@@ -25,9 +25,9 @@
     },
     {
       "id": "3a3396b1-f2a8-4491-a5fc-971855668e4c",
-      "name": "Prueba3",
+      "name": "Prueba3Edit",
       "password": "Prueba321",
-      "rol": "ADMIN",
+      "role": "ADMIN",
       "permission": [
         "CANCEL",
         "DELETE",
@@ -39,17 +39,18 @@
       "id": "3d35407d-ce66-44d2-a7e1-b94450bc0c85",
       "name": "Prueba2",
       "password": "Prueba234",
-      "rol": "USER",
+      "role": "USER",
       "permission": [
         "CANCEL",
-        "CREATE"
+        "CREATE",
+        "DELETE"
       ]
     },
     {
       "id": "f4e0a605-99b1-4a3d-bb19-edea9b6ee423",
       "name": "Prueba4",
       "password": "Prueba432",
-      "rol": "USER",
+      "role": "USER",
       "permission": [
         "CANCEL",
         "DELETE"
@@ -59,16 +60,17 @@
       "id": "0501977e-10ba-457f-a361-3afa53045ae9",
       "name": "Prueba5",
       "password": "Prueba54",
-      "rol": "USER",
+      "role": "USER",
       "permission": [
-        "DELETE"
+        "DELETE",
+        "CANCEL"
       ]
     },
     {
       "id": "38b726bc-7fe7-462d-8a33-4c0e8e01b691",
       "name": "Prueba6",
       "password": "Prueba65",
-      "rol": "USER",
+      "role": "USER",
       "permission": [
         "DELETE"
       ]

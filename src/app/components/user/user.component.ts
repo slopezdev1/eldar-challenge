@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormUserComponent } from '../form-user/form-user.component';
 import { IUser } from '../../interfaces/user.interface';
@@ -15,13 +15,35 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
 
   id: string
   isLoading: boolean = false
+  userFormData: IUser = {} as IUser
 
   constructor(private activatedRoute: ActivatedRoute, private _userService: UserService, private messageService: MessageService, private router: Router) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id')!;
+  }
+
+  ngOnInit(): void {
+    if(this.id !== null) {
+      this.getUser()
+    }
+  }
+
+  getUser() {
+    this.isLoading = true
+    this._userService.getUserById(this.id).subscribe({
+      next: response => {
+        setTimeout(() => {
+          this.setUserForm(response)
+          this.isLoading = false
+        }, 1000);
+      }
+    })
+  }
+  setUserForm(user: IUser) {
+    this.userFormData = user
   }
 
   getUserData(user: IUser) {
