@@ -14,7 +14,7 @@
             <td>{{ product.name }}</td>
             <td>{{ product.category }}</td>
             <td>
-                <p-button icon="pi pi-pencil" [rounded]="true" />
+                <p-button icon="pi pi-pencil" (click)="handleRedirectEdit('1')" [rounded]="true" />
             </td>
             <td>
                 <p-confirmPopup />

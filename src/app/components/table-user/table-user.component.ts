@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 //PrimeNG
@@ -16,6 +16,8 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class TableUserComponent {
 
+  @Output() handleRedirectEvent = new EventEmitter<string>()
+
   constructor(private confirmPopUpService: ConfirmationService) {
 
   }
@@ -32,5 +34,9 @@ export class TableUserComponent {
             reject: () => {
             }
     })
+  }
+
+  handleRedirectEdit(id: string) {
+    this.handleRedirectEvent.emit(id)
   }
 }

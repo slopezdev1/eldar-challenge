@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
@@ -10,4 +10,9 @@ import { ButtonModule } from 'primeng/button';
 })
 export class HeaderTableComponent {
 
+  @Output() handleRedirectEvent = new EventEmitter<string>()
+
+  handleRedirectCreate() {
+    this.handleRedirectEvent.emit()
+  }
 }
