@@ -1,0 +1,16 @@
+<main class="flex h-screen w-full flex flex-column">
+    <header class="w-full text-center shadow-4 bg-primary">
+        <div class="w-full flex p-4 align-items-center h-5rem justify-content-start">
+            <a [routerLink]="['/home']" class="h-full">
+                <img src="../../../assets/logo-eldar.png" class="h-full" alt="logo eldar">
+            </a>
+        </div>
+    </header>
+    <div class="w-full h-full flex align-items-center justify-content-center flex-column">
+        <router-outlet></router-outlet>
+    </div>
+    <footer class="w-full text-center">
+        Hecho con <span class="line-through">sudor</span> por <a href="https://www.linkedin.com/in/devslopez/"
+            target="_blank">slopez</a>
+    </footer>
+</main>
